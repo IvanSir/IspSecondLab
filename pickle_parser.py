@@ -1,22 +1,19 @@
-import dill as pickl
+import dill as pickle
 
 
 class Pickle:
 
-    def dump(obj, file="testpickle.pickle"):
-        f = open(file, 'w')
-        f.write(pickl.dumps(obj))
-        f.close()
+    def dump(obj, file="format_files/testpickle.pickle"):
+        with open(file, "wb") as fw:
+            pickle.dump(obj, fw)
 
     def dumps(obj):
-        return pickl.dumps(obj)
+        return pickle.dumps(obj)
 
-    def load(file="test.json"):
-        f = open(file, 'r')
-        packed = pickl.loads(f.read())
-        f.close()
-        return packed
+    def load(file="format_files/testpickle.pickle"):
+        with open(file, "rb") as fr:
+            obj = fr.read()
+        return pickle.loads(obj)
 
     def loads(src):
-        packed = pickl.loads(src)
-        return packed
+        return pickle.loads(src)

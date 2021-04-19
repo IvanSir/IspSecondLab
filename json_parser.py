@@ -1,25 +1,21 @@
-from io import FileIO
-from typing import Any, IO
 import json
 from Utilities import convert, deconvert
 
 
 class Json:
 
-    def dump(obj, file="test.json"):
-        f = open(file, 'w')
-        f.write(Json.dumps(obj))
-        f.close()
+    def dump(obj, file="format_files/testjson.json"):
+        with open(file, 'w') as fw:
+            fw.write(Json.dumps(obj))
 
     def dumps(obj):
         packed = convert(obj)
         return json.dumps(packed)
 
-    def load(file="test.json"):
-        f = open(file, 'r')
-        packed = Json.loads(f.read())
-        unpacked = deconvert(packed)
-        f.close()
+    def load(file="format_files/testjson.json"):
+        with open(file, 'r') as fr:
+            data = fr.read()
+            unpacked = Json.loads(data)
         return unpacked
 
     def loads(src):
