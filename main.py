@@ -48,62 +48,48 @@ json_seria = Serializer.create_serializer("JSON")
 dumped_obj = json_seria.dumps(circle)
 loaded_obj = json_seria.loads(dumped_obj)
 
-# print(loaded_obj.square(loaded_obj))
-# print(loaded_obj.radius)
+print(loaded_obj.square(loaded_obj))
+print(loaded_obj.radius)
 
 dumped_func = json_seria.dumps(summing)
 loaded_func = json_seria.loads(dumped_func)
-# print(loaded_func(11, 10))
+print(loaded_func(11, 10))
 
 dumped_lambda = json_seria.dumps(triple)
 loaded_lambda = json_seria.loads(dumped_lambda)
-# print(loaded_lambda(6))
+print(loaded_lambda(6))
 
 dumped_class = json_seria.dumps(Figure)
 loaded_class = json_seria.loads(dumped_class)
-# for i in inspect.getmembers(Figure):
-#     print(i)
-# print()
-#
-# for i in inspect.getmembers(Figure):
-#     print(i)
-# print()
 
-# print(dumped_class)
-# print(loaded_class)
-# awe = loaded_class("qwerty")
-# awe = loaded_class("auf")
-# print(awe)
-
-# print(getattr(loaded_class,"__init__"))
-# print(getattr(Figure,"__init__"))
-
+temp_obj = loaded_class("haha")
+print(temp_obj.square())
 
 dumped_hard = json_seria.dumps(calculate)
 loaded_hard = json_seria.loads(dumped_hard)
-# print(loaded_hard(3))
+print(loaded_hard(3))
 
 
 pickle_seria = Serializer.create_serializer("PICKLE")
 toml_seria = Serializer.create_serializer("TOML")
 yaml_seria = Serializer.create_serializer("YAML")
 
-# hm = yaml_seria.dumps(Figure)
-# print(hm)
-# opada = yaml_seria.loads(hm)
-# print(opada)
-# print()
-# qwert = opada("kukuwka")
-# qwert.radius = 2
-# yaml_seria.dumps(qwert)
-# obbj = yaml_seria.loads(yaml_seria.dumps(calculate))
-#
-# print(obbj(2))
+hm = yaml_seria.dumps(Figure)
+print(hm)
+opada = yaml_seria.loads(hm)
+print(opada)
+print()
+qwert = opada("kukuwka")
+qwert.radius = 2
+yaml_seria.dumps(qwert)
+obbj = yaml_seria.loads(yaml_seria.dumps(calculate))
+
+print(obbj(2))
 
 
 dfunc_toml = toml_seria.dumps(loaded_func)
 lfunc_toml = toml_seria.loads(dfunc_toml)
-# print(lfunc_toml(1, 5))
+print(lfunc_toml(1, 5))
 
 dobj_toml = toml_seria.dumps(circle)
 lobj_toml = toml_seria.loads(dobj_toml)

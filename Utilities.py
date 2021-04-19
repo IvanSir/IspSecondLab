@@ -1,5 +1,4 @@
 import builtins
-import re
 import inspect
 from types import FunctionType, CodeType, LambdaType
 
@@ -85,14 +84,11 @@ def unpack_function(src):
                 arguments[val] = ()
             else:
                 for value in arguments[val]:
-                    if value is None:
+                    if value == "!None":
                         temp_ls.append(None)
                     else:
                         temp_ls.append(value)
             arguments[val] = temp_ls
-
-
-
 
     coded = CodeType(arguments['co_argcount'],
                      arguments['co_posonlyargcount'],
@@ -151,9 +147,7 @@ def unpack_class(src):
             vars[attr] = deconvert(value)
         except:
             continue
-    myclass = type(src["__name__"], (), vars)
-    setattr(myclass, "__init__", vars["__init__"])
-    return myclass
+    return type(src["__name__"], (), vars)
 
 
 def convert(obj):
