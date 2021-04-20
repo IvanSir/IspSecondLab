@@ -1,10 +1,12 @@
 from Serializer import Serializer
-import inspect
-
+# import sympy as sp
+# from sympy.abc import x
+# polynom = sp.poly(x ** 3 - 13.3667 * (x ** 2) + 39.8645 * x - 20.6282, x)
 first_global = 3.14
 second_global = 16
 multiplier = 3
 
+# prim_dict = {12: "hit", 10: ["hello", "there"], 11: True, "oh": 222}
 
 class Figure:
     name = "circle"
@@ -24,15 +26,29 @@ def summing(a, b):
     return answer
 
 
-def inc_sort(mas):
-    for i in range(len(mas)):
-        mas[i] += 1
-    mas.sort()
-    return mas
+# def sign_changes(_poly_range_, value):
+#     counter = 0
+#     size = len(_poly_range_)
+#     current_sgn = _poly_range_[0](value) > 0
+#     for i in range(size - 1):
+#         new_sgn = _poly_range_[i + 1](value) > 0
+#         if new_sgn != current_sgn:
+#             counter += 1
+#         current_sgn = new_sgn
+#     return counter
+#
+#
+# def sturm_theorem(poly, left, right):
+#     sturm_sequence = [poly, sp.diff(poly)]
+#     sequence_range = sp.degree(poly, gen=x)
+#     for i in range(sequence_range - 1):
+#         sturm_sequence.append(-sp.div(sturm_sequence[i], sturm_sequence[i + 1])[1])
+#     return sign_changes(sturm_sequence, left) - sign_changes(sturm_sequence, right)
+
 
 
 def calculate(rad):
-    print("Now Harder")
+    # print("Now Harder")
     circ = Figure("little circle")
     circ.radius = rad
     squar = circ.square()

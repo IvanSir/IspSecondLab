@@ -51,9 +51,6 @@ def pack_function(obj):
                         converted_vals.append("!None")
                 arguments[key] = converted_vals
                 continue
-            if is_iterable(value) and len(value) == 0:
-                arguments[key] = "!empty"
-                continue
             arguments[key] = value
     result["__args__"] = arguments
     return result
@@ -80,14 +77,11 @@ def unpack_function(src):
     for val in arguments:
         if is_iterable(arguments[val]) and not isinstance(arguments[val], str):
             temp_ls = []
-            if arguments[val] == "!empty":
-                arguments[val] = ()
-            else:
-                for value in arguments[val]:
-                    if value == "!None":
-                        temp_ls.append(None)
-                    else:
-                        temp_ls.append(value)
+            for value in arguments[val]:
+                if value == "!None":
+                    temp_ls.append(None)
+                else:
+                    temp_ls.append(value)
             arguments[val] = temp_ls
 
     coded = CodeType(arguments['co_argcount'],
@@ -143,10 +137,7 @@ def pack_class(obj):
 def unpack_class(src):
     vars = {}
     for attr, value in src.items():
-        try:
-            vars[attr] = deconvert(value)
-        except:
-            continue
+        vars[attr] = deconvert(value)
     return type(src["__name__"], (), vars)
 
 
@@ -159,8 +150,8 @@ def convert(obj):
         return pack_inner_func(obj)
     elif inspect.isclass(obj):
         return pack_class(obj)
-    # elif inspect.isbuiltin(obj):
-    #     return pack_function(obj)
+    # elif inspect.ismodule(obj):
+    #     return pack_module(obj)
     else:
         return pack_object(obj)
 

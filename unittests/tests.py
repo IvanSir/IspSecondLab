@@ -170,7 +170,6 @@ class TestObject(unittest.TestCase):
         self.assertEqual(loaded.name, main.circle.name)
         self.assertEqual(loaded.samples, main.circle.samples)
 
-
     def test_toml_circle_str(self):
         dumped = main.toml_seria.dumps(main.circle)
         loaded = main.toml_seria.loads(dumped)
@@ -217,7 +216,6 @@ class TestClass(unittest.TestCase):
         fig_obj.radius = 10
         self.assertEqual(parsed_obj.square(), fig_obj.square())
 
-
     def test_json_figure_file(self):
         main.json_seria.dump(main.Figure)
         loaded = main.json_seria.load()
@@ -230,8 +228,63 @@ class TestClass(unittest.TestCase):
         self.assertEqual(parsed_obj.square(), fig_obj.square())
 
     def test_pickle_figure_str(self):
-        dumped = main.json_seria.dumps(main.Figure)
-        loaded = main.json_seria.loads(dumped)
+        dumped = main.pickle_seria.dumps(main.Figure)
+        loaded = main.pickle_seria.loads(dumped)
+        parsed_obj = loaded("ellipse")
+        fig_obj = main.Figure("circle")
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+        self.assertEqual(parsed_obj.radius, fig_obj.radius)
+        parsed_obj.radius = 10
+        fig_obj.radius = 10
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+
+    def test_pickle_figure_file(self):
+        main.pickle_seria.dump(main.Figure)
+        loaded = main.pickle_seria.load()
+        parsed_obj = loaded("ellipse")
+        fig_obj = main.Figure("circle")
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+        self.assertEqual(parsed_obj.radius, fig_obj.radius)
+        parsed_obj.radius = 10
+        fig_obj.radius = 10
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+
+    def test_toml_figure_str(self):
+        dumped = main.toml_seria.dumps(main.Figure)
+        loaded = main.toml_seria.loads(dumped)
+        parsed_obj = loaded("ellipse")
+        fig_obj = main.Figure("circle")
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+        self.assertEqual(parsed_obj.radius, fig_obj.radius)
+        parsed_obj.radius = 10
+        fig_obj.radius = 10
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+
+    def test_toml_figure_file(self):
+        main.toml_seria.dump(main.Figure)
+        loaded = main.toml_seria.load()
+        parsed_obj = loaded("ellipse")
+        fig_obj = main.Figure("circle")
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+        self.assertEqual(parsed_obj.radius, fig_obj.radius)
+        parsed_obj.radius = 10
+        fig_obj.radius = 10
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+
+    def test_yaml_figure_str(self):
+        dumped = main.yaml_seria.dumps(main.Figure)
+        loaded = main.yaml_seria.loads(dumped)
+        parsed_obj = loaded("ellipse")
+        fig_obj = main.Figure("circle")
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+        self.assertEqual(parsed_obj.radius, fig_obj.radius)
+        parsed_obj.radius = 10
+        fig_obj.radius = 10
+        self.assertEqual(parsed_obj.square(), fig_obj.square())
+
+    def test_yaml_figure_file(self):
+        main.yaml_seria.dump(main.Figure)
+        loaded = main.yaml_seria.load()
         parsed_obj = loaded("ellipse")
         fig_obj = main.Figure("circle")
         self.assertEqual(parsed_obj.square(), fig_obj.square())
@@ -241,3 +294,60 @@ class TestClass(unittest.TestCase):
         self.assertEqual(parsed_obj.square(), fig_obj.square())
 
 
+class TestHardFunction(unittest.TestCase):
+
+    def test_json_calc_str(self):
+        dumped = main.json_seria.dumps(main.calculate)
+        loaded = main.json_seria.loads(dumped)
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
+
+    def test_json_calc_file(self):
+        main.json_seria.dump(main.calculate)
+        loaded = main.json_seria.load()
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
+
+    def test_pickle_calc_str(self):
+        dumped = main.pickle_seria.dumps(main.calculate)
+        loaded = main.pickle_seria.loads(dumped)
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
+
+    def test_pickle_calc_file(self):
+        main.pickle_seria.dump(main.calculate)
+        loaded = main.pickle_seria.load()
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
+
+    def test_toml_calc_str(self):
+        dumped = main.toml_seria.dumps(main.calculate)
+        loaded = main.toml_seria.loads(dumped)
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
+
+    def test_toml_calc_file(self):
+        main.toml_seria.dump(main.calculate)
+        loaded = main.toml_seria.load()
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
+
+    def test_yaml_calc_str(self):
+        dumped = main.yaml_seria.dumps(main.calculate)
+        loaded = main.yaml_seria.loads(dumped)
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
+
+    def test_yaml_calc_file(self):
+        main.yaml_seria.dump(main.calculate)
+        loaded = main.yaml_seria.load()
+        self.assertEqual(loaded(2), main.calculate(2))
+        self.assertEqual(loaded(-4), main.calculate(-4))
+        self.assertRaises(TypeError, lambda: loaded("2"))
