@@ -4,7 +4,7 @@ from Utilities import convert, deconvert
 
 class Toml:
 
-    def dump(obj, file="format_files/testtoml.toml"):
+    def dump(obj, file="../format_files/testtoml.toml"):
         packed = convert(obj)
         with open(file, 'w') as fw:
             pytomlpp.dump(packed, fw)
@@ -13,7 +13,7 @@ class Toml:
         packed = convert(obj)
         return pytomlpp.dumps(packed)
 
-    def load(file="format_files/testtoml.toml"):
+    def load(file="../format_files/testtoml.toml"):
         with open(file, 'r') as fr:
             packed = pytomlpp.load(fr)
         return deconvert(packed)

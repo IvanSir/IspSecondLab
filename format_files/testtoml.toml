@@ -1,68 +1,9 @@
-__name__ = 'Figure'
-__type__ = 'class'
+__class__ = 'Figure'
+__type__ = 'object'
 name = 'circle'
+radius = 12
+samples = [ 'prosto', 'test', 1, 2, 'rabotaet' ]
 
-[__init__]
-__code__ = '''    def __init__(self, name):
-        self.name = name
-        self.radius = 5
-        self.samples = ["prosto", "test", 1, 2, "rabotaet"]
-'''
-__name__ = '__init__'
-__type__ = 'function'
-
-    [__init__.__args__]
-    co_argcount = 2
-    co_cellvars = []
-    co_code = [
-        124,
-        1,
-        124,
-        0,
-        95,
-        0,
-        100,
-        1,
-        124,
-        0,
-        95,
-        1,
-        100,
-        2,
-        100,
-        3,
-        100,
-        4,
-        100,
-        5,
-        100,
-        6,
-        103,
-        5,
-        124,
-        0,
-        95,
-        2,
-        100,
-        0,
-        83,
-        0
-    ]
-    co_consts = [ '!None', 5, 'prosto', 'test', 1, 2, 'rabotaet' ]
-    co_filename = '/home/ivan/PycharmProjects/ISPLab2/main.py'
-    co_firstlineno = 14
-    co_flags = 67
-    co_freevars = []
-    co_kwonlyargcount = 0
-    co_lnotab = [ 0, 1, 6, 1, 6, 1 ]
-    co_name = '__init__'
-    co_names = [ 'name', 'radius', 'samples' ]
-    co_nlocals = 2
-    co_posonlyargcount = 0
-    co_stacksize = 5
-    co_varnames = [ 'self', 'name' ]
-
-    [__init__.__globals__]
 [square]
 __code__ = '''    def square(self):
         return first_global * self.radius ** 2
@@ -76,7 +17,7 @@ __type__ = 'function'
     co_code = [ 116, 0, 124, 0, 106, 1, 100, 1, 19, 0, 20, 0, 83, 0 ]
     co_consts = [ '!None', 2 ]
     co_filename = '/home/ivan/PycharmProjects/ISPLab2/main.py'
-    co_firstlineno = 19
+    co_firstlineno = 17
     co_flags = 67
     co_freevars = []
     co_kwonlyargcount = 0
