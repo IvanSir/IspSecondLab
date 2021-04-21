@@ -30,8 +30,8 @@ square:
     co_consts:
     - '!None'
     - 2
-    co_filename: /home/ivan/PycharmProjects/ISPLab2/main.py
-    co_firstlineno: 18
+    co_filename: /home/ivan/PycharmProjects/ISPLab2/Examples.py
+    co_firstlineno: 19
     co_flags: 67
     co_freevars: []
     co_kwonlyargcount: 0

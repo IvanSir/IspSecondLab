@@ -6,11 +6,11 @@ import yaml_parser
 
 class Serializer:
     def create_serializer(format):
-        if format == "JSON":
+        if format == ".json":
             return json_parser.Json
-        elif format == "TOML":
+        elif format == ".toml":
             return toml_parser.Toml
-        elif format == "YAML":
+        elif format == ".yaml":
             return yaml_parser.Yaml
         else:
             return pickle_parser.Pickle
