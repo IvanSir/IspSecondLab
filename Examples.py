@@ -1,4 +1,4 @@
-from Serializer import Serializer
+from JptySerializer.Serializer import Serializer
 
 
 first_global = 3.14

@@ -1,5 +1,5 @@
 import json
-from Utilities import convert, deconvert
+from Utilities.Utilities import convert, deconvert
 
 
 class Json:

@@ -1,5 +1,5 @@
 import yaml
-from Utilities import convert, deconvert
+from Utilities.Utilities import convert, deconvert
 
 
 class Yaml:
