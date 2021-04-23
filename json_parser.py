@@ -14,8 +14,8 @@ class Json:
 
     def load(file="testjson.json"):
         with open(file, 'r+') as fr:
-            data = fr.read()
-        unpacked = Json.loads(data)
+            data = json.load(fr)
+        unpacked = deconvert(data)
         return unpacked
 
     def loads(src):

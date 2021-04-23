@@ -2,7 +2,7 @@ import builtins
 import inspect
 from types import FunctionType, CodeType, LambdaType
 
-primitives = (int, str, bool, float, tuple, list)
+primitives = (int, str, bool, float)
 
 
 def is_iterable(obj):
@@ -21,6 +21,36 @@ def get_global_vars(func):
     return globs
 
 
+def pack_iterable(obj):
+    if isinstance(obj, list) or isinstance(obj, tuple):
+        packed_iterable = []
+        for value in obj:
+            if value is None:
+                packed_iterable.append("!None")
+            packed_iterable.append(convert(value))
+        return packed_iterable
+    elif isinstance(obj, dict):
+        packed_dict = {}
+        for key, value in obj.items():
+            packed_dict[key] = convert(value)
+        return packed_dict
+
+
+def unpack_iterable(obj):
+    if isinstance(obj, list) or isinstance(obj, tuple):
+        unpacked_iterable = []
+        for value in obj:
+            if value == "!None":
+                unpacked_iterable.append(None)
+            unpacked_iterable.append(deconvert(value))
+        return unpacked_iterable
+    elif isinstance(obj, dict):
+        unpacked_dict = {}
+        for key, value in obj.items():
+            unpacked_dict[key] = deconvert(value)
+        return unpacked_dict
+
+
 def pack_inner_func(obj):
     return pack_function(FunctionType(obj, {}))
 
@@ -33,15 +63,12 @@ def pack_function(obj):
     result["__name__"] = obj.__name__
     result["__code__"] = func_code
     globs = get_global_vars(obj)
-    globs_converted = {}
-    for key, value in globs.items():
-        globs_converted[key] = convert(value)
-    result["__globals__"] = globs_converted
+    result["__globals__"] = pack_iterable(globs)
     arguments = {}
     for (key, value) in inspect.getmembers(obj.__code__):
         if key.startswith("co_"):
             if isinstance(value, bytes):
-                value = (list(value))
+                value = list(value)
             if is_iterable(value) and not isinstance(value, str):
                 converted_vals = []
                 for val in value:
@@ -150,8 +177,8 @@ def convert(obj):
         return pack_inner_func(obj)
     elif inspect.isclass(obj):
         return pack_class(obj)
-    # elif inspect.ismodule(obj):
-    #     return pack_module(obj)
+    elif is_iterable(obj):
+        return pack_iterable(obj)
     else:
         return pack_object(obj)
 
@@ -166,3 +193,7 @@ def deconvert(src):
             return unpack_object(src)
         elif "class" in src.values():
             return unpack_class(src)
+        else:
+            return unpack_iterable(src)
+    elif is_iterable(src):
+        return unpack_iterable(src)
