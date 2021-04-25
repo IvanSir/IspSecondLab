@@ -7,13 +7,16 @@ from JptySerializer.Serializer import Serializer
 
 def serialize(dest_format, path_file):
     serializer = Serializer.create_serializer(dest_format)
-    src_format = Path(path_file).suffix
-    if src_format == dest_format:
-        return
-    deserializer = Serializer.create_serializer(src_format)
-    abs_path = Path(path_file)
-    loaded = deserializer.load(path_file)
-    serializer.dump(loaded, Path(abs_path.parent, f"{abs_path.stem}{dest_format}"))
+    try:
+        src_format = Path(path_file).suffix
+        if src_format == dest_format:
+            return
+        deserializer = Serializer.create_serializer(src_format)
+        abs_path = Path(path_file)
+        loaded = deserializer.load(path_file)
+        serializer.dump(loaded, Path(abs_path.parent, f"{abs_path.stem}{dest_format}"))
+    except FileNotFoundError:
+        print("wrong path or format")
 
 
 def main():
@@ -26,10 +29,16 @@ def main():
 
     if args.config_file is not None:
         config = configparser.ConfigParser()
-        config.read(args.config_file)
-        serialize(config["settings"]["dest_format"], config["settings"]["path_file"])
-    else :
-        serialize(args.dest_format, args.path_file)
+        try:
+            config.read(args.config_file)
+            serialize(config["settings"]["dest_format"], config["settings"]["path_file"])
+        except KeyError:
+            print("invalid file")
+    else:
+        if args.dest_format and args.path_file:
+            serialize(args.dest_format, args.path_file)
+        else:
+            raise TypeError("invalid parameters")
 
 
 main()

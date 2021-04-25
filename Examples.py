@@ -1,3 +1,5 @@
+import inspect
+
 from JptySerializer.Serializer import Serializer
 
 
@@ -47,3 +49,7 @@ json_seria = Serializer.create_serializer(".json")
 pickle_seria = Serializer.create_serializer(".pickle")
 toml_seria = Serializer.create_serializer(".toml")
 yaml_seria = Serializer.create_serializer(".yaml")
+
+met = yaml_seria.dump(calculate)
+loaded = json_seria.load()
+print(loaded(2))

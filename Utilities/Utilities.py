@@ -59,9 +59,7 @@ def pack_function(obj):
     result = {"__type__": "function"}
     if inspect.ismethod(obj):
         obj = obj.__func__
-    func_code = inspect.getsource(obj)
     result["__name__"] = obj.__name__
-    result["__code__"] = func_code
     globs = get_global_vars(obj)
     result["__globals__"] = pack_iterable(globs)
     arguments = {}
