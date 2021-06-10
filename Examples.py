@@ -51,5 +51,5 @@ toml_seria = Serializer.create_serializer(".toml")
 yaml_seria = Serializer.create_serializer(".yaml")
 
 met = yaml_seria.dump(calculate)
-loaded = json_seria.load()
+loaded = yaml_seria.load()
 print(loaded(2))

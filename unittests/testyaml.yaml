@@ -47,7 +47,6 @@ square:
     co_stacksize: 3
     co_varnames:
     - self
-  __code__: "    def square(self):\n        return first_global * self.radius ** 2\n"
   __globals__:
     first_global: 3.14
   __name__: square

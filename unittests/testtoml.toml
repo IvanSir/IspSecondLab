@@ -5,9 +5,6 @@ radius = 12
 samples = [ 'prosto', 'test', 1, 2, 'rabotaet' ]
 
 [square]
-__code__ = '''    def square(self):
-        return first_global * self.radius ** 2
-'''
 __name__ = 'square'
 __type__ = 'function'
 
